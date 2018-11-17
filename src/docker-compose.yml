@@ -25,7 +25,7 @@ services:
       - myshop
   inventory:
     image: containerbank.azurecr.io/shop/inventory:BuildNumber
-    ports: ["8080:5000"]
+    ports: ["8080:80"]
     networks:
       - myshop      
   proxy:
