@@ -22,6 +22,7 @@ services:
       - myshop
   shop:
     image: containerbank.azurecr.io/shop/front:BuildNumber
+    ports: ["8080:5000"]
     networks:
       - myshop
     environment:
