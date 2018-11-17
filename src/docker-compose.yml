@@ -5,7 +5,7 @@ networks:
 services:
   proxy:
     image: containerbank.azurecr.io/shop/nginx-proxy:latest
-    ports: ["8080:80"]
+    ports: ["80:80"]
     networks:
       - myshop
   products:
@@ -22,7 +22,6 @@ services:
       - myshop
   shop:
     image: containerbank.azurecr.io/shop/front:BuildNumber
-    ports: ["80:5000"]
     networks:
       - myshop
     environment:
