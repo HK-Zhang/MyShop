@@ -3,11 +3,15 @@ networks:
   myshop:
     driver: overlay
 services:
-  proxy:
-    image: containerbank.azurecr.io/shop/nginx-proxy:latest
-    ports: ["80:80"]
+  shop:
+    image: containerbank.azurecr.io/shop/front:BuildNumber
+    ports: ["8080:5000"]
     networks:
       - myshop
+    environment:
+      - SHOP_PRODUCTS_API_URL=http://yxzhkswarmagents.southeastasia.cloudapp.azure.com/products/
+      - SHOP_RATINGS_API_URL=http://yxzhkswarmagents.southeastasia.cloudapp.azure.com/ratings/
+      - SHOP_RECOMMANDATIONS_API_URL=http://yxzhkswarmagents.southeastasia.cloudapp.azure.com/recommandations/
   products:
     image: containerbank.azurecr.io/shop/products-api:BuildNumber
     networks:
@@ -20,11 +24,8 @@ services:
     image: containerbank.azurecr.io/shop/recommandations-api:BuildNumber
     networks:
       - myshop
-  shop:
-    image: containerbank.azurecr.io/shop/front:BuildNumber
+  proxy:
+    image: containerbank.azurecr.io/shop/nginx-proxy:latest
+    ports: ["80:80"]
     networks:
       - myshop
-    environment:
-      - SHOP_PRODUCTS_API_URL=http://yxzhkswarmagents.southeastasia.cloudapp.azure.com/products/
-      - SHOP_RATINGS_API_URL=http://yxzhkswarmagents.southeastasia.cloudapp.azure.com/ratings/
-      - SHOP_RECOMMANDATIONS_API_URL=http://yxzhkswarmagents.southeastasia.cloudapp.azure.com/recommandations/
