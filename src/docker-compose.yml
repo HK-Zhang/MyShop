@@ -1,35 +1,20 @@
 version: '2'
-networks:
-  myshop:
-    driver: overlay
 services:
   shop:
     image: containerbank.azurecr.io/shop/front:BuildNumber
-    networks:
-      - myshop
     environment:
-      - SHOP_PRODUCTS_API_URL=http://yxzhkswarmagents.southeastasia.cloudapp.azure.com/products/
-      - SHOP_RATINGS_API_URL=http://yxzhkswarmagents.southeastasia.cloudapp.azure.com/ratings/
-      - SHOP_RECOMMANDATIONS_API_URL=http://yxzhkswarmagents.southeastasia.cloudapp.azure.com/recommandations/
+      - SHOP_PRODUCTS_API_URL=http://localhost/products/
+      - SHOP_RATINGS_API_URL=http://localhost/ratings/
+      - SHOP_RECOMMANDATIONS_API_URL=http://localhost/recommandations/
   products:
     image: containerbank.azurecr.io/shop/products-api:BuildNumber
-    networks:
-      - myshop
   ratings:
     image: containerbank.azurecr.io/shop/ratings-api:BuildNumber
-    networks:
-      - myshop
   recommandations:
     image: containerbank.azurecr.io/shop/recommandations-api:BuildNumber
-    networks:
-      - myshop
   inventory:
     image: containerbank.azurecr.io/shop/inventory:BuildNumber
-    ports: ["8080:5000"]
-    networks:
-      - myshop      
+    ports: ["8080:5000"]   
   proxy:
     image: containerbank.azurecr.io/shop/nginx-proxy:latest
     ports: ["80:80"]
-    networks:
-      - myshop
