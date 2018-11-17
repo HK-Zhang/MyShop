@@ -5,7 +5,7 @@ EXPOSE 5000
 FROM microsoft/dotnet:2.1-sdk AS build
 WORKDIR /src
 COPY ["Inventory.csproj", "Inventory/"]
-RUN dotnet restore "Inventory.csproj"
+RUN dotnet restore "Inventory/Inventory.csproj"
 COPY . .
 WORKDIR "/src/Inventory"
 RUN dotnet build "Inventory.csproj" -c Release -o /app
