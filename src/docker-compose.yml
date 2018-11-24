@@ -14,7 +14,7 @@ services:
     image: containerbank.azurecr.io/shop/recommandations-api:BuildNumber
   inventory:
     image: containerbank.azurecr.io/shop/inventory:BuildNumber
-    ports: ["12000":"80"]
+    ports: ["12000:80"]
   proxy:
     image: containerbank.azurecr.io/shop/nginx-proxy:latest
     ports: ["80:80"]
